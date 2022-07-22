@@ -5,18 +5,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EscolaController extends Controller{
-    // function index(){
-    //     $cursos = DB::table('cursos')->get();
-    //     return view('escolas.cursos.cursoindex', [
-    //         'cursos' => $cursos
-    //     ]);
-    // }
     function index(){
         $cursos = DB::table('cursos')->get();
         $formularios = DB::table('form')->get();
+        $turmas = DB::table('turmas')->get();
         return view('escolas.index', [
             'cursos' => $cursos,
-            'formularios' => $formularios
+            'formularios' => $formularios,
+            'turmas' => $turmas
         ]);
     }
     function createcurso(){
@@ -53,6 +49,8 @@ class EscolaController extends Controller{
     }
 
 
+
+
     // formulario
     function createformulario(){
         return view('escolas.formularios.formularioscreate');
@@ -84,6 +82,54 @@ class EscolaController extends Controller{
     function destroyformulario($id)
     {
         DB::table('form')->where('id', $id)->delete();
+        return redirect('/escolas');
+    }
+
+
+
+
+
+
+
+    function createturma()
+    {
+        return view('escolas.turmas.turmacreate');
+    }
+
+    function storeturma(Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+        DB::table('turmas')->insert($data);
+        return redirect('/escolas');
+    }
+
+    function editturma($id)
+    {
+        $turma = DB::table('turmas')->find($id);
+        return view('escolas.turmas.turmaedit', ['turma' => $turma]);
+    }
+
+    function updateturma(Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+        $id = array_shift($data);
+        DB::table('turmas')
+            ->where('id', $id)
+            ->update($data);
+        return redirect('/escolas');
+    }
+
+    function showturma($id)
+    {
+        $turma = DB::table('turmas')->select()->find($id);
+        return view('escolas.turmas.turmashow', ['turma' => $turma]);
+    }
+
+    function destroyturma($id)
+    {
+        DB::table('turmas')->where('id', $id)->delete();
         return redirect('/escolas');
     }
 }

@@ -50,4 +50,28 @@
         @endforeach
     </tbody>
 </table>
+
+<a class="btn btn-success mb-2" href="/escolas/turmacreate">Novo formulário</a>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Curso ID</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($turmas as $turma)
+            <tr>
+                <td>{{$turma->nome}}</td>
+                <td>{{$turma->curso_id}}</td>
+                <td>
+                    <a class="btn btn-warning" href="/escolas/{{$turma->id}}/turmaedit">Editar</a>
+                    <a class="btn btn-info" href="/escolas/{{$turma->id}}/turmashow">Ver</a>
+                    <a class="btn btn-danger" href="/escolas/{{$turma->id}}/turmadestroy">Remover</a>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection

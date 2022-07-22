@@ -32,3 +32,10 @@ Route::post('/escolas/formulariostore', [EscolaController::class, 'storeformular
 Route::get('/escolas/{id}/formularioedit', [EscolaController::class, 'editformulario']);
 Route::post('/escolas/formularioupdate', [EscolaController::class, 'updateformulario']);
 Route::get('/escolas/{id}/formulariodestroy', [EscolaController::class, 'destroyformulario']);
+
+Route::get('/escolas/{id}/turmashow', [EscolaController::class, 'showturma'])->where('id','[0-9]+');
+Route::get('/escolas/turmacreate', [EscolaController::class, 'createturma']);
+Route::post('/escolas/turmastore', [EscolaController::class, 'storeturma']);
+Route::get('/escolas/{id}/turmaedit', [EscolaController::class, 'editturma']);
+Route::post('/escolas/turmaupdate', [EscolaController::class, 'updateturma']);
+Route::get('/escolas/{id}/turmadestroy', [EscolaController::class, 'destroyturma']);
