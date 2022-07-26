@@ -37,11 +37,24 @@
                 <option value="2">*Cursos*</option>
             </select>
         </div>
+
         <div class="mb-2">
-            <label for="dfpg" class="form-label">Diferença Paga</label>
-            <input type="number" step=0.01 name="dfpg" class="form-control" id="dfpg">
+        <label>Pagou Diferença:</label><br>
+        <input type='radio' id='pagamento' name='pagamento' value='1'/>
+        <label for="pagamento">Sim</label>
+        <input type='radio' id='pagamento' name='pagamento' value='2'/>
+        <label for="pagamento">Não</label>
         </div>
+
+
         <a class="btn btn-danger" href="/escolas">Voltar</a>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
+    <script>
+    if(document.querySelector('#radiobuttonset > [value="2"]').checked = true){
+        var input = document.createElement("input");
+        input.setAttribute('type', 'text');
+    }
+
+    </script>
 @endsection
