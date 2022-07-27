@@ -1,7 +1,7 @@
 @extends('base.index')
 
 @section('container')
-    <form action='/escolas/turmastore' method='post' onchange="myFunction();">
+    <form action='/escolas/salvarform' method='post' onchange="myFunction();">
         <input type='hidden' name='_token' value='{{ csrf_token() }}' />
 
         <div class="mb-2">
@@ -14,19 +14,19 @@
         </div>
         <div class="mb-2">
             <label for="estado" class="form-label">Estado</label>
-            <select name="estado" id="estado">
+            <select class='form-control' name="estado" id="estado">
                 <option value=""></option>
             </select>
         </div>
         <div class="mb-2">
             <label for="cidade" class="form-label">Cidade</label>
-            <select name="cidade" id="cidade">
+            <select class='form-control' name="cidade" id="cidade">
                 <option value=""></option>
             </select>
         </div>
         <div class="mb-2">
             <label for="transporte" class="form-label">Transporte</label>
-            <select name="transporte" id="transporte">
+            <select class='form-control' name="transporte" id="transporte">
                 <option value="Ônibus">Ônibus</option>
                 <option value="Micro-ônibus">Micro-ônibus</option>
                 <option value="Van">Van</option>
