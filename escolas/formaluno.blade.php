@@ -1,7 +1,7 @@
 @extends('base.index')
 
 @section('container')
-    <form action='/escolas/turmastore' method='post'>
+    <form action='/escolas/turmastore' method='post' onchange="myFunction();">
         <input type='hidden' name='_token' value='{{ csrf_token() }}' />
 
         <div class="mb-2">
@@ -15,12 +15,21 @@
         <div class="mb-2">
             <label for="estado" class="form-label">Estado</label>
             <select name="estado" id="estado">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label for="cidade" class="form-label">Cidade</label>
+            <select name="cidade" id="cidade">
+                <option value=""></option>
             </select>
         </div>
         <div class="mb-2">
             <label for="transporte" class="form-label">Transporte</label>
             <select name="transporte" id="transporte">
-                <option value="2">*Transporte*</option>
+                <option value="Ônibus">Ônibus</option>
+                <option value="Micro-ônibus">Micro-ônibus</option>
+                <option value="Van">Van</option>
             </select>
         </div>
         <div class="mb-2">
@@ -46,15 +55,19 @@
         <label for="pagamento">Não</label>
         </div>
 
+        <div class='mb-2' id='m1' hidden>
+            <label for='diferenca'>Valor pago:</label><br>
+            <input class='form-control' type='number' step=0.01 id='diferenca' placeholder="Insira o valor">
+        </div>
 
-        <a class="btn btn-danger" href="/escolas">Voltar</a>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+
+        <a class="mt-2 btn btn-danger" href="/escolas">Voltar</a>
+        <button type="submit" class="mt-2 btn btn-primary">Enviar</button>
     </form>
-    <script>
-    if(document.querySelector('#radiobuttonset > [value="2"]').checked = true){
-        var input = document.createElement("input");
-        input.setAttribute('type', 'text');
-    }
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
 
-    </script>
 @endsection
