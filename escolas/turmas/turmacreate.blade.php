@@ -1,16 +1,16 @@
 @extends('base.index')
 
 @section('container')
-<form action='/escolas/turmastore' method='post'>
+<form action='/escolas/salvaform' method='post'>
     <input type='hidden' name='_token' value='{{ csrf_token() }}' />
 
     <div class="mb-2">
-        <label for="nome" class="form-label">Turma</label>
-        <input type="text" name="nome" class="form-control" id="nome">
+        <label for="nomea" class="form-label">Nome do Aluno</label>
+        <input type="text" name="nomea" class="form-control" id="nomea">
     </div>
     <div class="mb-2">
-        <label for="curso_id" class="form-label">Curso</label>
-        <select name="curso_id" id="curso_id">
+        <label for="Turma" class="form-label">Turma</label>
+        <select name="Turma" id="Turma">
             <option value="2">*Cursos*</option>
         </select>
     </div>
