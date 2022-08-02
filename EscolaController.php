@@ -8,7 +8,11 @@ class EscolaController extends Controller{
     function index(){
         $cursos = DB::table('cursos')->get();
         $formularios = DB::table('form')->get();
-        $turmas = DB::table('turmas')->get();
+        $turmas = DB::table('turmas')
+        ->join('cursos','turmas.curso_id','=','cursos.id')
+        // ->leftjoin('cursos','turmas.id','=','cursos.turma_id')
+        ->select('turmas.id','turmas.nome','cursos.nome as curso_nome')
+        ->get();
         return view('escolas.index', [
             'cursos' => $cursos,
             'formularios' => $formularios,
@@ -93,7 +97,9 @@ class EscolaController extends Controller{
 
     function createturma()
     {
-        return view('escolas.turmas.turmacreate');
+        $cursos = DB::table('cursos')->get();
+        
+        return view('escolas.turmas.turmacreate', ['cursos' => $cursos]);
     }
 
     function storeturma(Request $request)
