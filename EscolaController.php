@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -93,7 +93,9 @@ class EscolaController extends Controller{
 
     function createturma()
     {
-        return view('escolas.turmas.turmacreate');
+$cursos = DB::table('cursos')->get();
+
+        return view('escolas.turmas.turmacreate', ['cursos' => $cursos]);
     }
 
     function storeturma(Request $request)
