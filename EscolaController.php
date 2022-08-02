@@ -143,9 +143,14 @@ class EscolaController extends Controller{
     function formaluno(){
         $cursos = DB::table('cursos')->get();
         $turmas = DB::table('turmas')->get();
-        return view('escolas.formaluno', ['cursos' => $cursos, 'turmas' => $turmas]);
+        $datas = DB::table('form')->get();
+        return view('escolas.formaluno', ['cursos' => $cursos, 'turmas' => $turmas, 'datas' => $datas]);
     }
 
+    function respostasform(){
+        $formresposta = DB::table('formresp')->get();
+        return view('escolas.formresposta', ['formresposta' => $formresposta]);
+    }
 
 }
 
