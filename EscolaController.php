@@ -141,7 +141,9 @@ class EscolaController extends Controller{
 
 
     function formaluno(){
-        return view('escolas.formaluno');
+        $cursos = DB::table('cursos')->get();
+        $turmas = DB::table('turmas')->get();
+        return view('escolas.formaluno', ['cursos' => $cursos, 'turmas' => $turmas]);
     }
 
 

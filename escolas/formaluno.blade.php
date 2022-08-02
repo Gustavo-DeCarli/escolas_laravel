@@ -43,7 +43,20 @@
         <div class="mb-2">
             <label for="curso_id" class="form-label">Curso</label>
             <select name="curso_id" id="curso_id">
-                <option value="2">*Cursos*</option>
+                <option value="">Selecione uma opção</option>
+                @foreach ($cursos as $curso )
+                <option value="{{$curso->id}}">{{$curso->nome}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-2">
+            <label for="curso_id" class="form-label">Turmas</label>
+            <select name="curso_id" id="curso_id">
+                <option value="">Selecione uma opção</option>
+                @foreach ($turmas as $turma )
+                <option value="{{$turma->id}}">{{$turma->nome}}</option>
+                @endforeach
             </select>
         </div>
 
