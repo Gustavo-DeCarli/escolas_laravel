@@ -5,16 +5,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EscolaController extends Controller{
+    // cursos
     function index(){
         $cursos = DB::table('cursos')->get();
         $formularios = DB::table('form')->get();
-        $turmas = DB::table('turmas')->get();
+        $turmas = DB::table('turmas')
+        ->join('cursos','turmas.curso_id','=','cursos.id')
+        ->select('turmas.id','turmas.nome','cursos.nome as curso_nome')
+        ->get();
         return view('escolas.index', [
             'cursos' => $cursos,
             'formularios' => $formularios,
             'turmas' => $turmas
         ]);
     }
+
     function createcurso(){
         return view('escolas.cursos.cursocreate');
     }
@@ -51,8 +56,8 @@ class EscolaController extends Controller{
 
 
 
-    // formulario
-    function createformulario(){
+     // formulario
+     function createformulario(){
         return view('escolas.formularios.formularioscreate');
     }
     function storeformulario(Request $request){
@@ -89,11 +94,10 @@ class EscolaController extends Controller{
 
 
 
-
-
+// Turma
     function createturma()
     {
-$cursos = DB::table('cursos')->get();
+        $cursos = DB::table('cursos')->get();
 
         return view('escolas.turmas.turmacreate', ['cursos' => $cursos]);
     }
@@ -134,5 +138,13 @@ $cursos = DB::table('cursos')->get();
         DB::table('turmas')->where('id', $id)->delete();
         return redirect('/escolas');
     }
+
+
+    function formaluno(){
+        return view('escolas.formaluno');
+    }
+
+
 }
+
 ?>

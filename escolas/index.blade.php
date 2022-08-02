@@ -66,9 +66,9 @@
                 <td>{{$turma->nome}}</td>
                 <td>{{$turma->curso_nome}}</td>
             <td>
-                    <a class="btn btn-warning" href="/escolas/{{$formulario->id}}/formularioedit">Editar</a>
-                    <a class="btn btn-info" href="/escolas/{{$formulario->id}}/formularioshow">Ver</a>
-                    <a class="btn btn-danger" href="/escolas/{{$formulario->id}}/formulariodestroy">Remover</a>
+                    <a class="btn btn-warning" href="/escolas/{{$turma->id}}/turmaedit">Editar</a>
+                    <a class="btn btn-info" href="/escolas/{{$turma->id}}/turmashow">Ver</a>
+                    <a class="btn btn-danger" href="/escolas/{{$turma->id}}/turmadestroy">Remover</a>
             </td>
             </tr>
         @endforeach
