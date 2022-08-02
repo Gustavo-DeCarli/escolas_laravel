@@ -1,5 +1,5 @@
 @extends('base.index')
-
+@if(strtotime($datas->dt_inicio) > strtotime($datas->dt_fim))
 @section('container')
     <form action='/escolas/salvarform' method='post' onchange="myFunction();">
         <input type='hidden' name='_token' value='{{ csrf_token() }}' />
@@ -42,8 +42,8 @@
 
         <div class="mb-2">
             <label for="curso_id" class="form-label">Curso</label>
-            <select name="curso_id" id="curso_id">
-                <option value="">Selecione uma opção</option>
+            <select class="form-select" name="curso_id" id="curso_id">
+                <option>Selecione uma opção</option>
                 @foreach ($cursos as $curso )
                 <option value="{{$curso->id}}">{{$curso->nome}}</option>
                 @endforeach
@@ -52,8 +52,8 @@
 
         <div class="mb-2">
             <label for="curso_id" class="form-label">Turmas</label>
-            <select name="curso_id" id="curso_id">
-                <option value="">Selecione uma opção</option>
+            <select class="form-select" name="curso_id" id="curso_id">
+                <option>Selecione uma opção</option>
                 @foreach ($turmas as $turma )
                 <option value="{{$turma->id}}">{{$turma->nome}}</option>
                 @endforeach
