@@ -7,14 +7,24 @@ function myFunction() {
     }else{
         $div1.setAttribute("hidden", "hidden");
     }
+
+    const $select = document.getElementById('periodo')
+const $div = document.getElementById("form");
+if($select.value != ''){
+    $div.removeAttribute("hidden");
+}else{
+    $div.setAttribute("hidden", "hidden");
+}
 }
 
 
 
+    
+
 $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados', {id: 10, }, function (json) {
 var options = '<option value="">–  –</option>';
 for (var i = 0; i < json.length; i++) {
-    options += '<option data-id="' + json[i].id + '" value="' + json[i].id + '" >' + json[i].nome + '</option>';
+    options += '<option data-id="' + json[i].id + '" value="' + json[i].id + ', ' + json[i].nome +  '" >' + json[i].nome + '</option>';
 }
 $("select[name='estado']").html(options);
 });
@@ -31,4 +41,6 @@ if ($(this).val()) {
     $("select[name='cidade']").html('<option value="">–  –</option>');
 }
 });
+
+
 

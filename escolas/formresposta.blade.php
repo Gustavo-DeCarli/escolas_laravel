@@ -2,6 +2,8 @@
 
 @section('container')
 
+<a class="btn btn-success mb-2" href="/escolas/formulariocreate">Novo formulário</a>
+
 <table class="table table-dark">
     <thead>
         <tr>
@@ -15,7 +17,7 @@
             <th>Diferença:</th>
             <th>Data de início</th>
             <th>Data de término</th>
-
+            
         </tr>
     </thead>
     <tbody>
@@ -36,5 +38,4 @@
     </tbody>
 </table>
 
-
-<a href="/escolas">Voltar</a>
+<a href="/escolas/createform">Novo registro</a>

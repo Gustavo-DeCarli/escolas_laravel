@@ -6,9 +6,14 @@ use Illuminate\Support\Facades\DB;
 
 class EscolaController extends Controller{
     // cursos
+    
     function index(){
         $cursos = DB::table('cursos')->get();
         $formularios = DB::table('form')->get();
+        $formresposta = DB::table('formresp')
+        ->join('form', 'formresp.formulario_id', '=', 'form.id')
+        ->select('formresp.*', 'form.dt_inicio', 'form.dt_fim')
+        ->get();
         $turmas = DB::table('turmas')
         ->join('cursos','turmas.curso_id','=','cursos.id')
         ->select('turmas.id','turmas.nome','cursos.nome as curso_nome')
@@ -16,6 +21,7 @@ class EscolaController extends Controller{
         return view('escolas.index', [
             'cursos' => $cursos,
             'formularios' => $formularios,
+            'formresposta' => $formresposta,
             'turmas' => $turmas
         ]);
     }
@@ -143,14 +149,37 @@ class EscolaController extends Controller{
     function formaluno(){
         $cursos = DB::table('cursos')->get();
         $turmas = DB::table('turmas')->get();
-        $datas = DB::table('form')->get();
-        return view('escolas.formaluno', ['cursos' => $cursos, 'turmas' => $turmas, 'datas' => $datas]);
+        $date = date('Y/m/d');
+        $periodos = DB::table('form')->select()->where('dt_inicio', '>=', "$date", 'and', 'dt_fim', '>=', "$date")->get();
+        return view('escolas.formaluno', ['cursos' => $cursos, 'turmas' => $turmas, 'periodos' => $periodos ]);
     }
 
-    function respostasform(){
-        $formresposta = DB::table('formresp')->get();
-        return view('escolas.formresposta', ['formresposta' => $formresposta]);
-    }
+function respostasform(){
+    $formresposta = DB::table('formresp')->get();
+    return view('escolas.formresposta', ['formresposta' => $formresposta]);
+}
+ 
+function store(Request $request){
+    $data = $request->all();
+    unset($data['_token']);
+    $estado = explode(",", $data['estado']);
+    $cidade = explode(",", $data['cidade']);
+    DB::table('formresp')->insert([
+        'id' => NULL,
+        'formulario_id' => $data['periodo'],
+        'nome_aluno' => $data['nome_aluno'],
+        'turma_id' => $data['turma_id'],
+        'cpf' => $data['cpf'],
+        'cidade' => $cidade[1],
+        'cidade_id' => $cidade[0],
+        'uf' => $estado[1],
+        'uf_id' => $estado[0],
+        'transporte' => $data['transporte'],
+        'poder_publico_RESPONSAVEL' => $data['poder_publico_RESPONSAVEL'],
+        'diferenca_paga' => $data['diferenca']
+    ]);
+    return redirect('/escolas');
+}
 
 }
 

@@ -41,4 +41,6 @@ Route::post('/escolas/turmaupdate', [EscolaController::class, 'updateturma']);
 Route::get('/escolas/{id}/turmadestroy', [EscolaController::class, 'destroyturma']);
 
 Route::get('/escolas/formaluno', [EscolaController::class, 'formaluno']);
-Route::get('/escolas/formresposta', [EscolaController::class, 'respostasform']);
+
+Route::get('/escolas/createform', [EscolaController::class, 'create']);
+Route::post('/escolas/store', [EscolaController::class, 'store']);
