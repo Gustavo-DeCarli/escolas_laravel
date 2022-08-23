@@ -7,16 +7,10 @@
         <input type='hidden' name='_token' value='{{ csrf_token() }}' />
 
         <div class="mb-2">
-            <label for="periodo" class="form-label">Selecione o periodo</label>
-            <select name="periodo" class="form-control" id="periodo">
-                <option value="">Selecione uma opção</option>
-                @foreach ($periodos as $periodo )
-                <option value="{{$periodo->id}}">De {{$periodo->dt_inicio}} até {{$periodo->dt_fim}}</option>
-                @endforeach
-            </select>
+                <input type='hidden' nome='periodo' value="{{$periodo->id}}">
         </div>
 
-        <div id="form" hidden>
+        <div id="form">
         <div class="mb-2">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" name="nome_aluno" class="form-control" id="nome_aluno">

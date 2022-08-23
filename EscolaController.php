@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class EscolaController extends Controller{
     // cursos
     
@@ -12,7 +11,7 @@ class EscolaController extends Controller{
         $formularios = DB::table('form')->get();
         $formresposta = DB::table('formresp')
         ->join('form', 'formresp.formulario_id', '=', 'form.id')
-        ->select('formresp.*', 'form.dt_inicio', 'form.dt_fim')
+        ->selectraw('formresp.*, date_format(form.dt_inicio, "%d/%m/%Y") as dt_inicio, date_format(form.dt_fim, "%d/%m/%Y") as dt_fim')
         ->get();
         $turmas = DB::table('turmas')
         ->join('cursos','turmas.curso_id','=','cursos.id')
@@ -150,8 +149,11 @@ class EscolaController extends Controller{
         $cursos = DB::table('cursos')->get();
         $turmas = DB::table('turmas')->get();
         $date = date('Y/m/d');
-        $periodos = DB::table('form')->select()->where('dt_inicio', '>=', "$date", 'and', 'dt_fim', '>=', "$date")->get();
-        return view('escolas.formaluno', ['cursos' => $cursos, 'turmas' => $turmas, 'periodos' => $periodos ]);
+        $periodo = DB::table('form')->where('dt_inicio', '<=', $date)->where('dt_fim', '>=', $date)->first();
+        if(!empty($periodo->id))
+            return view('escolas.formaluno', ['cursos' => $cursos, 'turmas' => $turmas, 'periodo' => $periodo ]);
+         
+        return view('escolas.periodofechado');
     }
 
 function respostasform(){
@@ -164,9 +166,10 @@ function store(Request $request){
     unset($data['_token']);
     $estado = explode(",", $data['estado']);
     $cidade = explode(",", $data['cidade']);
+    $periodo = DB::table('form')->where('dt_inicio', '<=', "$date", 'and', 'dt_fim', '>=', "$date")->first();
     DB::table('formresp')->insert([
         'id' => NULL,
-        'formulario_id' => $data['periodo'],
+        'formulario_id' => $periodo->id,
         'nome_aluno' => $data['nome_aluno'],
         'turma_id' => $data['turma_id'],
         'cpf' => $data['cpf'],

@@ -7,19 +7,8 @@ function myFunction() {
     }else{
         $div1.setAttribute("hidden", "hidden");
     }
-
-    const $select = document.getElementById('periodo')
-const $div = document.getElementById("form");
-if($select.value != ''){
-    $div.removeAttribute("hidden");
-}else{
-    $div.setAttribute("hidden", "hidden");
-}
 }
 
-
-
-    
 
 $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados', {id: 10, }, function (json) {
 var options = '<option value="">–  –</option>';
