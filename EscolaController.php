@@ -147,7 +147,7 @@ class EscolaController extends Controller{
 
     function formaluno(){
         $cursos = DB::table('cursos')->get();
-        $turmas = DB::table('turmas')->get();
+        $turmas= DB::table('turmas')->get();
         $date = date('Y/m/d');
         $periodo = DB::table('form')->where('dt_inicio', '<=', $date)->where('dt_fim', '>=', $date)->first();
         if(!empty($periodo->id))
@@ -165,8 +165,10 @@ function store(Request $request){
     $data = $request->all();
     unset($data['_token']);
     $estado = explode(",", $data['estado']);
-    $cidade = explode(",", $data['cidade']);
-    $periodo = DB::table('form')->where('dt_inicio', '<=', "$date", 'and', 'dt_fim', '>=', "$date")->first();
+    $cidade = explode(",", $data['cidade']);        
+    $date = date('Y/m/d');
+    $periodo = DB::table('form')->where('dt_inicio', '<=', $date)->where('dt_fim', '>=', $date)->first();
+    
     DB::table('formresp')->insert([
         'id' => NULL,
         'formulario_id' => $periodo->id,
